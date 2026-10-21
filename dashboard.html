@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracking</title>
+    <link rel="stylesheet" href="style.css?v=sleep-any-date-1">
+</head>
+<body class="dashboard-page">
+    <main class="dashboard-layout">
+        <header class="dashboard-heading">
+            <p class="dashboard-eyebrow">YOUR PROGRESS</p>
+            <h1>Habit dashboard</h1>
+            <p>See how your hobbies are adding up.</p>
+        </header>
+
+        <section class="daily-summary-card card" aria-labelledby="dailySummaryTitle">
+            <div class="daily-summary-header">
+                <div>
+                    <p class="hobby-chart-eyebrow">YOUR DAY</p>
+                    <h2 id="dailySummaryTitle">Daily summary</h2>
+                    <p>Review your hobbies, memorable moments, and sleep for a selected date.</p>
+                </div>
+                <div class="daily-summary-date-control">
+                    <label for="dailySummaryDate">Date</label>
+                    <input id="dailySummaryDate" type="date">
+                </div>
+            </div>
+            <div class="daily-summary-grid">
+                <section class="daily-summary-section" aria-labelledby="dailySummaryHobbiesTitle">
+                    <h3 id="dailySummaryHobbiesTitle">Hobbies</h3>
+                    <ul id="dailySummaryHobbies" class="daily-summary-list"></ul>
+                    <p id="dailySummaryHobbiesStatus" class="daily-summary-status" role="status" aria-live="polite"></p>
+                </section>
+                <section class="daily-summary-section" aria-labelledby="dailySummaryMomentsTitle">
+                    <h3 id="dailySummaryMomentsTitle">Memorable moments</h3>
+                    <ul id="dailySummaryMoments" class="daily-summary-list"></ul>
+                    <p id="dailySummaryMomentsStatus" class="daily-summary-status" role="status" aria-live="polite"></p>
+                </section>
+                <section class="daily-summary-section" aria-labelledby="dailySummarySleepTitle">
+                    <h3 id="dailySummarySleepTitle">Sleep</h3>
+                    <p id="dailySummarySleep" class="daily-summary-sleep"></p>
+                    <p id="dailySummarySleepStatus" class="daily-summary-status" role="status" aria-live="polite"></p>
+                </section>
+            </div>
+        </section>
+
+        <section class="hobbiesPie" aria-labelledby="hobbyChartTitle">
+            <div class="card">
+                <div class="hobby-chart-header">
+                    <div>
+                        <p class="hobby-chart-eyebrow">ACTIVITY BREAKDOWN</p>
+                        <h2 id="hobbyChartTitle">Hobby checks</h2>
+                        <p class="hobby-chart-description">Your completed hobby check-ins by activity.</p>
+                    </div>
+                    <button class="manage-hobbies-button" type="button" id="openHobbiesDialog">
+                        Manage hobbies
+                    </button>
+                </div>
+
+                <div class="hobby-chart-toolbar">
+                    <label for="hobbyChartPeriod">Period</label>
+                    <select id="hobbyChartPeriod">
+                        <option value="week">This week</option>
+                        <option value="month">This month</option>
+                        <option value="year">This year</option>
+                    </select>
+                    <label for="hobbyChartDate">Or choose a date</label>
+                    <input id="hobbyChartDate" type="date">
+                    <p class="hobby-chart-total"><strong id="hobbyChartTotal">0</strong><span>total checks</span></p>
+                </div>
+                <p class="hobby-chart-filter-help">Changing the period shows that range; choosing a date shows that day.</p>
+
+                <div class="hobby-chart-layout">
+                    <div class="hobby-chart-visual">
+                        <canvas id="hobbyChart" role="img" aria-label="Pie chart of hobby checks this week"></canvas>
+                    </div>
+                    <div class="hobby-chart-legend-panel">
+                        <h3>By hobby</h3>
+                        <ul id="hobbyChartLegend" aria-label="Hobby check counts"></ul>
+                    </div>
+                </div>
+                <p id="hobbyChartStatus" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+
+        <section class="journal-card card" aria-labelledby="journalTitle">
+            <div class="journal-header">
+                <div>
+                    <p class="hobby-chart-eyebrow">YOUR JOURNAL</p>
+                    <h2 id="journalTitle">Memorable moments</h2>
+                    <p>Today is <time id="journalToday"></time>. Save a moment worth remembering.</p>
+                </div>
+            </div>
+
+            <form id="journalForm" class="journal-form">
+                <label for="journalEntry">Today's journal entry</label>
+                <textarea
+                    id="journalEntry"
+                    name="moment"
+                    rows="4"
+                    maxlength="10000"
+                    placeholder="What made today memorable?"
+                    required
+                ></textarea>
+                <div class="journal-form-footer">
+                    <p id="journalStatus" role="status" aria-live="polite"></p>
+                    <button id="journalSaveButton" type="submit">Save entry</button>
+                </div>
+            </form>
+
+            <div class="journal-history">
+                <div class="journal-history-header">
+                    <h3>Journal history</h3>
+                    <div class="journal-filters">
+                        <label for="journalPeriod">View</label>
+                        <select id="journalPeriod">
+                            <option value="day">Day</option>
+                            <option value="week">Week</option>
+                            <option value="month">Month</option>
+                            <option value="year">Year</option>
+                            <option value="all">All entries</option>
+                        </select>
+                        <label for="journalDate">Reference date</label>
+                        <input id="journalDate" type="date">
+                    </div>
+                </div>
+                <ol id="journalEntries" class="journal-entries" aria-live="polite"></ol>
+                <p id="journalHistoryEmpty" class="journal-empty" hidden>No entries found for this period.</p>
+            </div>
+        </section>
+
+        <section class="daily-score-card card" aria-labelledby="dailyScoreTitle">
+            <div class="daily-score-header">
+                <div>
+                    <p class="hobby-chart-eyebrow">MONTHLY OVERVIEW</p>
+                    <h2 id="dailyScoreTitle">Daily sleep score</h2>
+                    <p>Choose any date to view or record sleep; the chart shows that date's month. An earlier wake time means the next day.</p>
+                </div>
+                <p id="dailyScoreMonth" class="daily-score-month"></p>
+            </div>
+
+            <form id="dailyScoreForm" class="daily-score-form">
+                <label for="dailyScoreDate">Sleep date</label>
+                <input id="dailyScoreDate" name="date" type="date" required>
+                <label for="dailySleepStart">Sleep start</label>
+                <input id="dailySleepStart" name="sleepStart" type="time" required>
+                <label for="dailyWakeTime">Wake up</label>
+                <input id="dailyWakeTime" name="wakeTime" type="time" required>
+                <button id="dailyScoreSaveButton" type="submit">Save sleep times</button>
+            </form>
+
+            <div class="daily-score-chart-wrapper">
+                <svg
+                    id="dailyScoreChart"
+                    class="daily-score-chart"
+                    viewBox="0 0 1000 420"
+                    role="img"
+                    aria-label="Daily sleep duration in hours for this month"
+                ></svg>
+            </div>
+            <p id="dailyScoreStatus" class="daily-score-status" role="status" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <dialog id="manageHobbiesDialog" class="hobbies-dialog" aria-labelledby="manageHobbiesTitle">
+        <div class="hobbies-dialog-header">
+            <h2 id="manageHobbiesTitle">Manage your hobbies</h2>
+            <button type="button" class="hobbies-dialog-close" id="closeHobbiesDialog" aria-label="Close">
+                &times;
+            </button>
+        </div>
+        <iframe
+            id="hobbiesFrame"
+            title="Hobbies checklist"
+            data-src="habbies.html?embedded=1&v=warning-fixes-1"
+        ></iframe>
+    </dialog>
+    <script src="dashboard.js?v=sleep-selected-month-chart-1"></script>
+</body>
+</html>

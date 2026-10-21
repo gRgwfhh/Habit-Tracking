@@ -1,0 +1,940 @@
+body {
+    background: repeating-radial-gradient(#848055 3px, #000 3.5px) 0 0 / 24px 24px #2b2447;
+    font-family: Arial, Helvetica, sans-serif;
+    display:flex;
+    justify-content: center;
+    padding-top:50px;
+}
+/* Hobbies CSS */
+
+.checklist-container {
+    justify-content: center;
+    border-radius: 20px;
+    width: max(850px, calc(100vw - 40px));
+    box-sizing: border-box;
+    padding: 50px;
+    margin: 20px;
+    background: #eee;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.hobby-text {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.input-section {
+    /* display:flex; */
+    flex-wrap: wrap;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.input-section button {
+    flex: 0 0 auto;
+}
+
+.hobby-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.hobby-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.hobby-table caption {
+    padding: 8px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.hobby-table th,
+.hobby-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.hobby-table thead th {
+    background-color: #f2f2f2;
+}
+
+.hobby-table th:first-child,
+.hobby-table td:first-child {
+    text-align: center;
+}
+
+input[type="text"] {
+    flex:1;
+    padding:8px;
+    border:1px solid #ccc;
+    border-radius:4px;
+}
+
+button {
+    padding:8px 12px;
+    background-color:#28a745;
+    color:white;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.hobbiesPie {
+    width: min(850px, calc(100vw - 40px));
+}
+
+.hobbiesPie .card {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 24px;
+    border-radius: 12px;
+    background: #eee;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hobbiesPie h1 {
+    margin-top: 0;
+}
+
+.hobby-chart-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 16px;
+}
+
+#hobbyChart {
+    width: min(320px, 100%);
+    height: 260px;
+}
+
+#hobbyChartLegend {
+    display: grid;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#hobbyChartLegend li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hobby-chart-swatch {
+    width: 12px;
+    height: 12px;
+    flex: 0 0 12px;
+    border-radius: 2px;
+}
+
+.dashboard-page {
+    display: block;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 40px 24px;
+    background-color: #f1f5f9;
+    background-image: none;
+    color: #172033;
+}
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    width: min(1100px, 100%);
+    margin: 0 auto;
+}
+
+.dashboard-heading {
+    grid-column: 1 / -1;
+}
+
+.dashboard-heading h1 {
+    margin: 4px 0;
+    color: #172033;
+    font-size: clamp(28px, 4vw, 38px);
+}
+
+.dashboard-heading > p:last-child {
+    margin: 8px 0 0;
+    color: #526078;
+}
+
+.daily-summary-card {
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding: clamp(20px, 4vw, 32px);
+}
+
+.daily-summary-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.daily-summary-header h2 {
+    margin: 8px 0 4px;
+    color: #172033;
+    font-size: 25px;
+}
+
+.daily-summary-header > div:first-child > p:last-child {
+    margin: 0;
+    color: #526078;
+}
+
+.daily-summary-date-control {
+    display: grid;
+    gap: 6px;
+}
+
+.daily-summary-date-control label {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.daily-summary-date-control input {
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    border: 1px solid #94a3b8;
+    border-radius: 6px;
+    background: #fff;
+    color: #172033;
+    font: inherit;
+}
+
+.daily-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 22px;
+}
+
+.daily-summary-section {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid #dbe3ef;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.daily-summary-section h3 {
+    margin: 0 0 12px;
+    color: #172033;
+    font-size: 17px;
+}
+
+.daily-summary-list {
+    display: grid;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.daily-summary-list li {
+    padding: 10px 12px;
+    border-radius: 7px;
+    background: #fff;
+    color: #334155;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.daily-summary-status,
+.daily-summary-sleep {
+    margin: 0;
+    color: #526078;
+    line-height: 1.5;
+}
+
+.daily-summary-sleep {
+    color: #172033;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.dashboard-eyebrow,
+.hobby-chart-eyebrow {
+    margin: 0;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.hobbiesPie {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+.hobbiesPie .card,
+.dashboard-placeholder,
+.daily-score-card {
+    border: 1px solid #dbe3ef;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.daily-score-card {
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding: clamp(20px, 4vw, 32px);
+}
+
+.daily-score-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.daily-score-header h2 {
+    margin: 8px 0 4px;
+    color: #172033;
+    font-size: 25px;
+}
+
+.daily-score-header p:last-child,
+.daily-score-month {
+    margin: 0;
+    color: #526078;
+}
+
+.daily-score-month {
+    font-weight: 700;
+}
+
+.daily-score-form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.daily-score-form label {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.daily-score-form input {
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    border: 1px solid #94a3b8;
+    border-radius: 6px;
+    background: #fff;
+    color: #172033;
+    font: inherit;
+}
+
+.daily-score-form input[type="number"] {
+    width: 86px;
+}
+
+.daily-score-form button {
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 6px;
+    background: #1d4ed8;
+    font: inherit;
+    font-weight: 700;
+}
+
+.daily-score-form button:hover:not(:disabled),
+.daily-score-form button:focus-visible {
+    background: #1e40af;
+}
+
+.daily-score-form button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.daily-score-chart-wrapper {
+    width: 100%;
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.daily-score-chart {
+    display: block;
+    width: 100%;
+    min-width: 780px;
+    height: auto;
+    overflow: visible;
+}
+
+.daily-score-gridline {
+    stroke: #dbe3ef;
+    stroke-width: 1;
+}
+
+.daily-score-gridline-vertical {
+    stroke: #edf1f7;
+}
+
+.daily-score-threshold {
+    stroke: #dc2626;
+    stroke-dasharray: 8 6;
+    stroke-width: 2;
+}
+
+.daily-score-axis-label {
+    fill: #526078;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+.daily-score-day-label {
+    font-size: 11px;
+}
+
+.daily-score-line {
+    stroke: #2563eb;
+    stroke-linecap: round;
+    stroke-width: 3;
+}
+
+.daily-score-line-low {
+    stroke: #dc2626;
+}
+
+.daily-score-point {
+    fill: #fff;
+    stroke: #2563eb;
+    stroke-width: 3;
+}
+
+.daily-score-status {
+    min-height: 1.25em;
+    margin: 12px 0 0;
+    color: #166534;
+}
+
+.daily-score-status-error {
+    color: #b91c1c;
+}
+
+.hobbiesPie .card {
+    padding: clamp(20px, 4vw, 36px);
+}
+
+.hobby-chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.hobby-chart-header h2 {
+    margin: 8px 0 4px;
+    color: #172033;
+    font-size: 25px;
+}
+
+.hobby-chart-description {
+    margin: 0;
+    color: #526078;
+}
+
+.manage-hobbies-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 0 18px;
+    border-radius: 8px;
+    background: #1d4ed8;
+    color: #fff;
+    font-weight: 700;
+    font: inherit;
+    font-weight: 700;
+}
+
+.manage-hobbies-button:hover,
+.manage-hobbies-button:focus-visible {
+    background: #1e40af;
+}
+
+.hobby-chart-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+    padding: 14px 16px;
+    border: 1px solid #dbe3ef;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.hobby-chart-toolbar label {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.hobby-chart-toolbar select,
+.hobby-chart-toolbar input[type="date"] {
+    min-height: 38px;
+    padding: 0 32px 0 10px;
+    border: 1px solid #94a3b8;
+    border-radius: 6px;
+    background: #fff;
+    color: #172033;
+    font: inherit;
+}
+
+.hobby-chart-filter-help {
+    margin: 8px 0 0;
+    color: #526078;
+    font-size: 13px;
+}
+
+.hobby-chart-total {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 0 0 auto;
+    color: #526078;
+    font-size: 14px;
+}
+
+.hobby-chart-total strong {
+    color: #172033;
+    font-size: 22px;
+}
+
+.hobby-chart-layout {
+    justify-content: space-evenly;
+    min-height: 300px;
+    margin-top: 20px;
+}
+
+.hobby-chart-visual {
+    display: grid;
+    width: min(360px, 100%);
+    height: 300px;
+    place-items: center;
+}
+
+#hobbyChart {
+    width: min(300px, 100%);
+    height: 280px;
+}
+
+.hobby-chart-legend-panel {
+    width: min(320px, 100%);
+    max-height: 280px;
+    overflow: auto;
+}
+
+.hobby-chart-legend-panel h3 {
+    margin: 0 0 12px;
+    color: #334155;
+    font-size: 14px;
+}
+
+#hobbyChartLegend {
+    gap: 0;
+}
+
+#hobbyChartLegend li {
+    min-height: 40px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    font-size: 14px;
+}
+
+.hobby-chart-swatch {
+    width: 14px;
+    height: 14px;
+    flex-basis: 14px;
+    border-radius: 4px;
+}
+
+#hobbyChartStatus {
+    color: #b91c1c;
+}
+
+.dashboard-placeholder {
+    padding: 24px;
+}
+
+.dashboard-placeholder h2 {
+    margin-top: 0;
+    color: #172033;
+}
+
+.dashboard-placeholder p {
+    margin-bottom: 0;
+    color: #526078;
+}
+
+.journal-card {
+    grid-column: 1 / -1;
+    padding: clamp(20px, 4vw, 32px);
+    border: 1px solid #dbe3ef;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.journal-header h2 {
+    margin: 8px 0 4px;
+    color: #172033;
+    font-size: 25px;
+}
+
+.journal-header p:last-child {
+    margin: 0;
+    color: #526078;
+}
+
+.journal-form {
+    display: grid;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.journal-form label,
+.journal-history h3 {
+    color: #263449;
+    font-weight: 700;
+}
+
+.journal-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #94a3b8;
+    border-radius: 8px;
+    color: #172033;
+    font: inherit;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.journal-form textarea:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.25);
+    border-color: #2563eb;
+}
+
+.journal-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.journal-form-footer p {
+    margin: 0;
+    color: #166534;
+}
+
+.journal-form-footer p.journal-status-error {
+    color: #b91c1c;
+}
+
+.journal-form button {
+    min-height: 42px;
+    padding: 0 18px;
+    background: #1d4ed8;
+    font: inherit;
+    font-weight: 700;
+}
+
+.journal-form button:hover:not(:disabled),
+.journal-form button:focus-visible {
+    background: #1e40af;
+}
+
+.journal-form button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.journal-history {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.journal-history h3 {
+    margin: 0 0 14px;
+    font-size: 18px;
+}
+
+.journal-history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.journal-history-header h3 {
+    margin: 0;
+}
+
+.journal-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.journal-filters label {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.journal-filters select,
+.journal-filters input {
+    min-height: 38px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    border: 1px solid #94a3b8;
+    border-radius: 6px;
+    background: #fff;
+    color: #172033;
+    font: inherit;
+}
+
+.journal-filters input:disabled {
+    background: #e2e8f0;
+    color: #64748b;
+}
+
+.journal-entries {
+    display: grid;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.journal-entry {
+    padding: 16px;
+    border: 1px solid #dbe3ef;
+    border-left: 4px solid #2563eb;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.journal-entry time {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.journal-entry p {
+    margin: 8px 0 0;
+    color: #172033;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.journal-empty {
+    margin: 0;
+    color: #526078;
+}
+
+.journal-status-error {
+    color: #b91c1c;
+}
+
+.hobbies-dialog {
+    width: min(1000px, calc(100vw - 32px));
+    height: min(820px, calc(100vh - 32px));
+    max-width: calc(100vw - 32px);
+    box-sizing: border-box;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.3);
+}
+
+.hobbies-dialog[open] {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+}
+
+.hobbies-dialog::backdrop {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(3px);
+}
+
+.hobbies-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border-bottom: 1px solid #dbe3ef;
+}
+
+.hobbies-dialog-header h2 {
+    margin: 0;
+    color: #172033;
+    font-size: 18px;
+}
+
+.hobbies-dialog-close {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 8px;
+    background: #e2e8f0;
+    color: #172033;
+    font-size: 26px;
+    line-height: 1;
+}
+
+.hobbies-dialog-close:hover,
+.hobbies-dialog-close:focus-visible {
+    background: #cbd5e1;
+}
+
+.hobbies-dialog iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    border: 0;
+}
+
+.checklist-container {
+    width: min(850px, calc(100vw - 40px));
+    margin: 20px auto;
+}
+
+.hobbies-page.embedded-hobbies {
+    display: block;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    background: #f8fafc;
+    color: #172033;
+}
+
+.embedded-hobbies .checklist-container {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: clamp(16px, 3vw, 28px);
+    border-radius: 0;
+    background: #f8fafc;
+    box-shadow: none;
+}
+
+.embedded-hobbies .checklist-container h2 {
+    margin-top: 0;
+    color: #172033;
+    font-size: 24px;
+}
+
+.embedded-hobbies .input-section {
+    display: flex;
+    align-items: stretch;
+}
+
+.embedded-hobbies .input-section input[type="text"] {
+    min-width: 0;
+}
+
+.embedded-hobbies .input-section button {
+    max-width: 100%;
+}
+
+.embedded-hobbies .hobby-table {
+    min-width: 620px;
+}
+
+.embedded-hobbies .hobby-table th,
+.embedded-hobbies .hobby-table td {
+    color: #172033;
+}
+
+.embedded-hobbies #statusMessage {
+    color: #334155;
+}
+
+@media (max-width: 640px) {
+    .dashboard-page {
+        padding: 24px 14px;
+    }
+
+    .dashboard-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .daily-summary-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hobby-chart-total {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .dashboard-placeholder {
+        padding: 20px;
+    }
+
+    .checklist-container {
+        padding: 24px;
+    }
+
+    .hobbies-dialog {
+        width: calc(100vw - 16px);
+        max-width: calc(100vw - 16px);
+        height: calc(100vh - 16px);
+        border-radius: 10px;
+    }
+
+    .hobbies-dialog-header {
+        padding: 8px 12px;
+    }
+
+    .embedded-hobbies .checklist-container {
+        padding: 16px 12px;
+    }
+
+    .embedded-hobbies .input-section {
+        flex-direction: column;
+    }
+}

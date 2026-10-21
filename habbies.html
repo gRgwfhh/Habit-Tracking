@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habbies</title>
+    <link rel="stylesheet" href="style.css?v=warning-fixes-1">
+</head>
+
+<body class="hobbies-page">
+    <div class="checklist-container">
+        <h2>My Hobbies</h2>
+        <div class="input-section">
+            <input type="text" name="itemInput" id="itemInput" class="hobbyText" maxlength="255" aria-label="Hobby name"><button id="addBtn" type="button">Click To Add Your Hobby
+                Here</button>
+        </div>
+        <p id="statusMessage" role="status" aria-live="polite"></p>
+        <div class="hobby-table-wrapper">
+            <table class="hobby-table">
+                <caption>Your saved hobbies</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Done</th>
+                        <th scope="col">Hobbies</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Checked</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="hobbyTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js?v=warning-fixes-1"></script>
+</body>
+
+</html>
