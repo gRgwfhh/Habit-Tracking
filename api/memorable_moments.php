@@ -87,12 +87,38 @@ try {
             }
 
             if ($period === 'all') {
-                $statement = $pdo->query(
+                $page = filter_var($_GET['page'] ?? 1, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+                if ($page === false) {
+                    respond(400, ['error' => 'Page must be a positive integer.']);
+                }
+
+                $pageSize = filter_var($_GET['pageSize'] ?? 25, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+                if ($pageSize === false) {
+                    respond(400, ['error' => 'Page size must be a positive integer.']);
+                }
+
+                $pageSize = min($pageSize, 100);
+                $offset = ($page - 1) * $pageSize;
+
+                $countStatement = $pdo->query('SELECT COUNT(*) FROM memorable_moments');
+                $totalEntries = (int) $countStatement->fetchColumn();
+                $totalPages = (int) ceil($totalEntries / $pageSize);
+
+                $statement = $pdo->prepare(
                     'SELECT momentID, memorable_moment AS moment,
                             DATE_FORMAT(moment_date, \'%Y-%m-%d\') AS momentDate
                      FROM memorable_moments
-                     ORDER BY moment_date DESC, time_created DESC, momentID DESC'
+                     ORDER BY moment_date DESC, time_created DESC, momentID DESC
+                     LIMIT :offset, :pageSize'
                 );
+                $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
+                $statement->bindValue(':pageSize', $pageSize, PDO::PARAM_INT);
+                $statement->execute();
+
+                header('X-Total-Count: ' . $totalEntries);
+                header('X-Page: ' . $page);
+                header('X-Page-Size: ' . $pageSize);
+                header('X-Total-Pages: ' . $totalPages);
             } else {
                 $statement = $pdo->prepare(
                     'SELECT momentID, memorable_moment AS moment,

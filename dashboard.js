@@ -60,6 +60,11 @@ let dailyScoresByDate = new Map();
 const loadedDailyScoreMonths = new Set();
 let dailySummaryRequestId = 0;
 let selectedScoreDateRequestId = 0;
+let journalPage = 1;
+let journalPageSize = 25;
+let journalTotalEntries = 0;
+let journalTotalPages = 0;
+let journalRequestId = 0;
 
 function formatJournalDate(dateValue) {
     const [year, month, day] = dateValue.split('-').map(Number);
@@ -449,6 +454,7 @@ async function loadDailySummary() {
 }
 
 async function loadJournal() {
+    journalPage = 1;
     journalStatus.textContent = '';
     journalStatus.classList.remove('journal-status-error');
     journalHistoryEmpty.hidden = true;
@@ -457,10 +463,18 @@ async function loadJournal() {
         const params = new URLSearchParams({ period: journalPeriod.value });
         if (journalPeriod.value !== 'all') {
             params.set('date', journalDate.value);
+        } else {
+            params.set('page', String(journalPage));
+            params.set('pageSize', String(journalPageSize));
         }
 
+        const requestId = ++journalRequestId;
         const response = await fetch(`api/memorable_moments.php?${params}`, { cache: 'no-store' });
         const result = await response.json();
+
+        if (requestId !== journalRequestId) {
+            return;
+        }
 
         if (!response.ok) {
             throw new Error(
@@ -468,11 +482,62 @@ async function loadJournal() {
             );
         }
 
+        journalTotalEntries = Number(response.headers.get('X-Total-Count') ?? 0);
+        journalTotalPages = Number(response.headers.get('X-Total-Pages') ?? 0);
+
         journalEntries.replaceChildren(...result.map(createJournalEntry));
         journalHistoryEmpty.hidden = result.length > 0;
+        updateJournalPaginationUI();
     } catch (error) {
         journalStatus.classList.add('journal-status-error');
         journalStatus.textContent = `Could not load journal history: ${error.message}`;
+    }
+}
+
+async function loadMoreJournal() {
+    if (journalPage >= journalTotalPages) {
+        return;
+    }
+
+    journalPage++;
+
+    try {
+        const params = new URLSearchParams({
+            period: journalPeriod.value,
+            page: String(journalPage),
+            pageSize: String(journalPageSize)
+        });
+        const response = await fetch(`api/memorable_moments.php?${params}`, { cache: 'no-store' });
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                typeof result.error === 'string' ? result.error : 'Could not load more journal entries.'
+            );
+        }
+
+        journalTotalEntries = Number(response.headers.get('X-Total-Count') ?? 0);
+        journalTotalPages = Number(response.headers.get('X-Total-Pages') ?? 0);
+
+        journalEntries.append(...result.map(createJournalEntry));
+        updateJournalPaginationUI();
+    } catch (error) {
+        journalPage--;
+        journalStatus.classList.add('journal-status-error');
+        journalStatus.textContent = `Could not load more journal entries: ${error.message}`;
+    }
+}
+
+function updateJournalPaginationUI() {
+    const loadMoreButton = document.getElementById('journalLoadMore');
+    if (journalPeriod.value !== 'all') {
+        loadMoreButton.hidden = true;
+        return;
+    }
+    if (journalPage >= journalTotalPages || journalTotalEntries === 0) {
+        loadMoreButton.hidden = true;
+    } else {
+        loadMoreButton.hidden = false;
     }
 }
 
@@ -491,6 +556,7 @@ journalPeriod.addEventListener('change', function() {
     loadJournal();
 });
 journalDate.addEventListener('change', loadJournal);
+document.getElementById('journalLoadMore').addEventListener('click', loadMoreJournal);
 dailySummaryDate.value = journalDate.value;
 dailySummaryDate.addEventListener('change', loadDailySummary);
 
